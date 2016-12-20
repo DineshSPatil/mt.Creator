@@ -1,0 +1,42 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-positive">
+      <ion-nav-back-button></ion-nav-back-button>
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="side-menu21"></ion-nav-view>
+  </ion-side-menu-content>
+  <ion-side-menu side="left" id="side-menu21">
+    <ion-content padding="true" style="top:0px !important;" class="side-menu-left side-menu-gradient">
+      <div class="spacer" style="width: 268px; height: 36px;"></div>
+      <div class="profile-image">
+        <img src="img/jnulu31lRgG0xSyXZGd5_3818635296b2d5c7891d869edeb3e8fd.jpg" style="display: block; width: 40%; height: auto; margin-left: auto; margin-right: auto;">
+      </div>
+      <h3 id="menu-heading1" style="color:#FFFFFF;font-weight:lighter;text-align:center;">Dinesh Patil</h3>
+      <div class="spacer" style="width: 268px; height: 17px;"></div>
+      <ion-list id="menu-list1" class="manual-list-fullwidth">
+        <ion-item class=" item-icon-left  side-menu-item" id="menu-list-item1" ui-sref="menu.home" menu-close="" active-page-highlight>
+          <i class="icon ion-tshirt-outline"></i>Clothes</ion-item>
+        <ion-item class="item-icon-left  side-menu-item" id="menu-list-item2" ui-sref="menu.analytics" menu-close="" active-page-highlight>
+          <i class="icon ion-ios-pie-outline"></i>Analytics</ion-item>
+        <ion-item class="item-icon-left  side-menu-item" id="menu-list-item3" ui-sref="menu.favourite" menu-close="" active-page-highlight>
+          <i class="icon ion-android-favorite-outline"></i>Favourites</ion-item>
+        <ion-item class="item-icon-left  side-menu-item" id="menu-list-item4" ui-sref="menu.profile" menu-close="" active-page-highlight>
+          <i class="icon ion-ios-person-outline"></i>Profile</ion-item>
+        <ion-item class="item-icon-left  side-menu-item" id="menu-list-item5" ui-sref="menu.settings" menu-close="" active-page-highlight>
+          <i class="icon ion-ios-gear-outline"></i>Settings</ion-item>
+      </ion-list>
+      <!-- <a ui-sref="login" id="login-button2" class="button button-light  button-block button-clear">Logout</a> -->
+      <!-- <button id="logout-button1" class="button button-light button-block" ng-click="logout()">Logout</button> -->
+      <div class="row">
+        <div class="col text-center">
+          <button ion-button class="button button-light button-icon ion-log-out" ng-click="logout()"> Logout</button>
+        </div>
+      </div> 
+        
+
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

@@ -1,0 +1,46 @@
+<ion-view title="Add Cloth" id="page8">
+	
+	<!-- <ion-nav-buttons side="right" class="has-header">
+	<button ui-sref="menu.home" class="button button-icon ion-tshirt-outline"></button>
+	</ion-nav-buttons>
+	-->
+  <ion-content padding="true" class="has-header">
+  	<form name="myForm" novalidate>
+  		<div class="list" >
+  			<label class="item item-input">
+  				<i class="icon ion-tshirt-outline placeholder-icon"></i>
+  				<input type="text" name="clothName" ng-model="clothName" placeholder="Cloth Name [Required]" ng-minlength="5"
+  				required/>
+  			</label>
+  			<input type="hidden" ng-model="selection" ng-init="selection=optional">
+  			<label class="item item-input" ng-init="">
+  				<i class="icon ion-pricetags placeholder-icon"></i>
+  				<input type="text" name="clothRFID" ng-model="rfid" ng-minlength="3" placeholder="Tag Id" />
+  			</label>
+  			<label class="item item-input">
+  				<i class="icon ion-clipboard placeholder-icon"></i>
+  				<input type="text" name="clothInfo" ng-model="clothInfo" ng-minlength="5" placeholder="Description [Required]" required/>
+  			</label>
+  		</div>
+  		
+  		<div class="padding">
+  			<button class="button button-block button-positive" ng-disabled="myForm.$invalid" ng-click="submit(clothName)">
+  				Submit
+  			</button>
+  		</div>
+
+  		<div class="padding">
+  			<!-- <p ng-show="myForm.clothName.$error.required">* Cloth Name is required!</p> -->
+  			<!-- <p ng-show="myForm.clothName.$invalid && !myForm.clothName.$pristine"> * Cloth Name must be valid name!</p> -->
+  			<p ng-show="myForm.clothName.$error.minlength"> * Cloth Name must be min length of 5 characters</p>
+
+  			<!-- <p ng-show="myForm.clothInfo.$error.required">* Cloth desc is required!</p> -->
+  			<!-- <p ng-show="myForm.clothInfo.$invalid && !myForm.clothName.$pristine"> * Cloth desc must be valid name!</p> -->
+  			<p ng-show="myForm.clothInfo.$error.minlength"> * Cloth desc must be min length of 5 characters</p>
+  		</div>
+
+  		
+  	</form>
+  </ion-content>
+
+</ion-view>

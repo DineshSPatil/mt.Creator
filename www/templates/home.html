@@ -1,0 +1,42 @@
+<ion-view title="Clothes" id="page1" >
+	
+	<ion-nav-buttons side="right" class="has-header">
+	<button ui-sref="menu.addCloth" class="button button-icon icon ion-ios-plus-outline"></button>
+	</ion-nav-buttons>
+	
+	<div class="bar bar-subheader">
+  		<button class="button button-icon icon ion-ios-minus-outline icon-left" ng-click="toggle('showDelete')">
+		</button>
+		
+		<button class="button button-icon icon ion-navicon icon-right" ng-click="toggle('showReorder')">
+		</button>
+	</div>
+		
+  <ion-content padding="false" class="has-subheader">
+  	
+  	<ion-list can-swipe="true" padding="false" show-delete="showDelete" show-reorder="showReorder">
+  		<ion-item ng-repeat="item in items" class="item-thumbnail-left">
+  			<img ng-src="{{item.img}}">
+    		<h4>{{item.name}}</h4>
+    		<p>Hayao Miyazaki • 1988</p>
+    		<ion-option-button class="button-light ion-ios-heart" ng-click="addToFav($index, item)"></ion-option-button>
+    		<ion-delete-button class="ion-minus-circled" ng-click="items.splice($index, 1)"></ion-delete-button>
+    		<ion-reorder-button class="ion-navicon" on-reorder="reorderItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+  		</ion-item>
+	</ion-list>
+
+	<!-- temp section - remove this -->
+	<ion-list can-swipe="true" padding="false" show-delete="showDelete" show-reorder="showReorder">
+  		<ion-item ng-repeat="item in items" class="item-thumbnail-left">
+  			<img ng-src="{{item.img}}">
+    		<h4>{{item.name}}</h4>
+    		<p>Hayao Miyazaki • 1988</p>
+    		<ion-option-button class="button-light ion-ios-heart" ng-click="addToFav($index, item)"></ion-option-button>
+    		<ion-delete-button class="ion-minus-circled" ng-click="items.splice($index, 1)"></ion-delete-button>
+    		<ion-reorder-button class="ion-navicon" on-reorder="reorderItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
+  		</ion-item>
+	</ion-list>
+
+  </ion-content>
+
+</ion-view>

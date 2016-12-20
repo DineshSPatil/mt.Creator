@@ -1,0 +1,25 @@
+<ion-view title="Login" hide-nav-bar="true" cache-view="false" nav-transition="none" id="page4">
+  <ion-content padding="true" style="background: url(img/smart_clothes/1-vintage_clothes.jpg) no-repeat center;background-size:cover;" class="manual-ios-statusbar-padding" scroll="false">
+    <div id="login-markdown1" class="show-list-numbers-and-dots error-box" ng-if>
+      <p style="color:#000000;">{{error}}</p>
+    </div>
+    <form id="login-form1" class="list center-form">
+      <div>
+        <img src="img/nad6SW0dRCpD8g2ldkdu_WR_logo_thingworx.png" style="display: block; width: 60%; height: auto; margin-left: auto; margin-right: auto;">
+      </div>
+      <ion-list id="login-list2">
+        <label class="item item-input top-input" id="login-input1">
+          <span class="input-label">Email</span>
+          <input type="email" placeholder="" ng-model="data.email">
+        </label>
+        <label class="item item-input bottom-input" id="login-input2">
+          <span class="input-label">Password</span>
+          <input type="password" placeholder="" ng-model="data.password" ng-minlength="6" ng-maxlength="12">
+        </label>
+      </ion-list>
+      <div class="spacer" style="width: 300px; height: 27px;"></div>
+      <button id="login-button1" class="button button-light  button-block" ng-click="login()">Log in</button>
+      <a ui-sref="signup" id="login-button2" class="button button-light  button-block button-clear">Or create an account</a>
+    </form>
+  </ion-content>
+</ion-view>
