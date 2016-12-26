@@ -14,13 +14,13 @@ angular.module('app.services', ['ngCordova',])
         	} else {
         		images = [];
         	}
-        	alert("images ---> " + images);
+        	//alert("images ---> " + images);
         	return images;
         };
 
         function addImage(img) {
         	images.push(img);
-        	alert("addImage : " +img);
+        	//alert("addImage : " +img);
         	window.localStorage.setItem(IMAGE_STORAGE_KEY, JSON.stringify(images));
         };
 
@@ -31,7 +31,7 @@ angular.module('app.services', ['ngCordova',])
 })
 
 .factory('ImageService', function($cordovaCamera, FileService, $q, $cordovaFile){
-	
+
 	function makeid(){
 		var text = '';
 		var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -70,13 +70,13 @@ angular.module('app.services', ['ngCordova',])
 			var namePath = imageUrl.substr(0, imageUrl.lastIndexOf('/') + 1);
 			//namePath = namePath.replace("content://", "file:///");
 			var newName = makeid() + name;
-			alert("newName --->" + newName);
-			alert("saveMedia ---> " + imageUrl + " *** " + name + " *** " + namePath + " *** " + newName + "Data Dir: " + cordova.file.dataDirectory);
-			$cordovaFile.copyFile(cordova.file.dataDirectory, name, namePath, newName).then(function(info) {
+			//alert("newName --->" + newName);
+			//alert("saveMedia ---> " + imageUrl + " *** " + name + " *** " + namePath + " *** " + newName + "Data Dir: " + cordova.file.dataDirectory);
+			$cordovaFile.copyFile( namePath, name, cordova.file.dataDirectory , newName).then(function(info) {
 				FileService.storeImage(newName);
 				resolve();
 			}, function(e) {
-				alert("failed");
+				//alert("failed");
 				reject();
 			});
 		});
@@ -93,24 +93,48 @@ angular.module('app.services', ['ngCordova',])
 
 }])
 
-.service('LoginService', function($q) {
+.service('LoginService', function($q, $http) {
 	return {
 		loginUser: function(email, pwd) {
 			var deferred = $q.defer();
 			var promise = deferred.promise;
+      var PostDataResponse;
+      var ResponseDetails = '';
+      // http post request to Thingworx
+            var data = {
+                Email: email,
+                Password : pwd,
+                appKey: 'e5005283-9e2b-480d-93ec-44eca86672bc'
+            }
 
-			if(email == '' || pwd == ''){
-				
-				deferred.reject('Wrong credentials');
-			}else if(email == 'dinesh@ptc.com' && pwd == 'dinesh') {
-				
-				deferred.resolve('Welcome' + email + '!');
-			}
-			else {
-				
-				deferred.reject('Wrong credentials');
-			}
-			promise.success = function(fn) {
+            var config = {
+                headers : {
+                    'Content-Type': 'application/json;charset=utf-8',
+                    'x-thingworx-session':'true',
+                    'appKey': 'e5005283-9e2b-480d-93ec-44eca86672bc'
+                }
+            }
+
+            $http.post('http://localhost:8080/Thingworx/Things/smartThing/Services/AuthUser', data, config)
+            .success(function (data, status, headers, config) {
+                PostDataResponse = data.rows[0].Result;
+
+                if(PostDataResponse == true) {
+                  deferred.resolve('Welcome' + email + '!');
+                }
+                else {
+                  deferred.reject('Wrong credentials');
+                }
+
+            })
+            .error(function (data, status, header, config) {
+                ResponseDetails = "Data: " + data +
+                    "<hr />status: " + status +
+                    "<hr />headers: " + header +
+                    "<hr />config: " + config;
+            });
+
+			  promise.success = function(fn) {
 				promise.then(fn);
 				return promise;
 			}
@@ -124,23 +148,48 @@ angular.module('app.services', ['ngCordova',])
 	}
 })
 
-.service('SignUpService', function($q) {
+.service('SignUpService', function($q, $http) {
 	return {
 		signupUser: function(name, email, pwd) {
 			var deferred = $q.defer();
 			var promise = deferred.promise;
+      var PostDataResponse;
+      var ResponseDetails = '';
+      // http post request to Thingworx
+            var data = {
+                Name: name,
+                Email: email,
+                Password : pwd,
+                appKey: 'e5005283-9e2b-480d-93ec-44eca86672bc'
+            }
 
-			if(name== '' || email == '' || pwd == ''){
-				
-				deferred.reject('Wrong credentials');
-			}else if(email == 'dinesh@ptc.com' && pwd == 'dinesh') {
-				
-				deferred.resolve('Welcome' + email + '!');
-			}
-			else {
-				
-				deferred.reject('Wrong credentials');
-			}
+            var config = {
+                headers : {
+                    'Content-Type': 'application/json;charset=utf-8',
+                    'x-thingworx-session':'true'
+
+                }
+            }
+
+            $http.post('http://localhost:8080/Thingworx/Things/smartThing/Services/AddNewUser', data, config)
+            .success(function (data, status, headers, config) {
+                PostDataResponse = data.rows[0].Result;
+
+                if(PostDataResponse == true) {
+                  deferred.resolve('Welcome' + email + '!');
+                }
+                else {
+                  deferred.reject('Wrong credentials');
+                }
+
+            })
+            .error(function (data, status, header, config) {
+                ResponseDetails = "Data: " + data +
+                    "<hr />status: " + status +
+                    "<hr />headers: " + header +
+                    "<hr />config: " + config;
+            });
+
 			promise.success = function(fn) {
 				promise.then(fn);
 				return promise;
@@ -154,4 +203,3 @@ angular.module('app.services', ['ngCordova',])
 		}
 	}
 })
-

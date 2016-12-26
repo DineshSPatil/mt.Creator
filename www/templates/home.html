@@ -1,25 +1,26 @@
 <ion-view title="Clothes" id="page1" >
-	
+
 	<ion-nav-buttons side="right" class="has-header">
 	<button ui-sref="menu.addCloth" class="button button-icon icon ion-ios-plus-outline"></button>
 	</ion-nav-buttons>
-	
+
 	<div class="bar bar-subheader">
   		<button class="button button-icon icon ion-ios-minus-outline icon-left" ng-click="toggle('showDelete')">
 		</button>
-		
+
 		<button class="button button-icon icon ion-navicon icon-right" ng-click="toggle('showReorder')">
 		</button>
 	</div>
-		
+
   <ion-content padding="false" class="has-subheader">
-  	
+
+
   	<ion-list can-swipe="true" padding="false" show-delete="showDelete" show-reorder="showReorder">
-  		<ion-item ng-repeat="item in items" class="item-thumbnail-left">
+  		<ion-item ng-repeat="item in items | filter : SearchCloth"  class="item-thumbnail-left">
   			<img ng-src="{{item.img}}">
     		<h4>{{item.name}}</h4>
-    		<p>Hayao Miyazaki • 1988</p>
-    		<ion-option-button class="button-light ion-ios-heart" ng-click="addToFav($index, item)"></ion-option-button>
+    		<p class="item-text-wrap">Hayao Miyazaki • 1988</p>
+    		<ion-option-button class="button-light ion-ios-star" ng-click="addToFav($index, item)"></ion-option-button>
     		<ion-delete-button class="ion-minus-circled" ng-click="items.splice($index, 1)"></ion-delete-button>
     		<ion-reorder-button class="ion-navicon" on-reorder="reorderItem(item, $fromIndex, $toIndex)"></ion-reorder-button>
   		</ion-item>
@@ -27,7 +28,7 @@
 
 	<!-- temp section - remove this -->
 	<ion-list can-swipe="true" padding="false" show-delete="showDelete" show-reorder="showReorder">
-  		<ion-item ng-repeat="item in items" class="item-thumbnail-left">
+  		<ion-item ng-repeat="item in items | filter : SearchCloth" class="item-thumbnail-left">
   			<img ng-src="{{item.img}}">
     		<h4>{{item.name}}</h4>
     		<p>Hayao Miyazaki • 1988</p>
@@ -38,5 +39,12 @@
 	</ion-list>
 
   </ion-content>
+
+	<div class="bar bar-footer">
+		<label class="item item-input" style="width:100%">
+			<i class="icon ion-android-search placeholder-icon"></i>
+			<input type="search" ng-model="SearchCloth" placeholder="Search"/>
+		</label>
+	</div>
 
 </ion-view>

@@ -1,10 +1,10 @@
-angular.module('app.controllers', ['app.services', 'ngCordova', ])
-  
+angular.module('app.controllers', ['app.services', 'ngCordova', 'ng-fusioncharts',])
+
 .controller('homeCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
-    
+
     // start --- Delete and Reorder utility
 	$scope.showDelete = false;
 	$scope.showReorder = false;
@@ -53,15 +53,48 @@ function ($scope, $stateParams) {
 	}
 
 }])
-   
+
 .controller('analyticsCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams) {
 
+  $scope.myDataSource = {
+    chart: {
+        caption: "Age profile of website visitors",
+        subcaption: "Last Year",
+        startingangle: "30",
+        showlabels: "0",
+        showlegend: "1",
+        enablemultislicing: "0",
+        slicingdistance: "15",
+        showpercentvalues: "1",
+        showpercentintooltip: "0",
+        plottooltext: "Age group : $label Total visit : $datavalue",
+        theme: "fint"
+    },
+    data: [
+        {
+            label: "Teenage",
+            value: "1250400"
+        },
+        {
+            label: "Adult",
+            value: "1463300"
+        },
+        {
+            label: "Mid-age",
+            value: "1050700"
+        },
+        {
+            label: "Senior",
+            value: "491000"
+        }
+    ]
+  };
 
 }])
-   
+
 .controller('favouriteCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -84,17 +117,17 @@ function ($scope, $stateParams) {
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
 function ($scope, $stateParams, $cordovaDevice, $cordovaFile, $ionicPlatform, $ionicActionSheet, ImageService, FileService) {
-	
+
 	$ionicPlatform.ready(function() {
 		$scope.images = FileService.images();
-		alert("In controller"+$scope.images);
+		//alert("In controller"+$scope.images);
 		if(!$scope.$$phase)$scope.$apply();
-		
+
 	});
 
 	$scope.urlForImage = function(imageName) {
 		var trueOrigin = cordova.file.dataDirectory + imageName;
-		alert("urlForImage: " + imageName);
+		//alert("urlForImage: " + imageName);
 		return trueOrigin;
 	};
 
@@ -120,14 +153,14 @@ function ($scope, $stateParams, $cordovaDevice, $cordovaFile, $ionicPlatform, $i
 	};
 
 }])
-   
-.controller('menuCtrl', ['$scope', '$stateParams', '$state',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+
+.controller('menuCtrl', ['$scope', '$stateParams', '$state', '$rootScope',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $state) {
+function ($scope, $stateParams, $state, $rootScope) {
 
 	//$scope.userData = $ionicUser.details;
-
+    //alert($rootScope.email);
     $scope.logout = function(){
         //$ionicAuth.logout();
         $state.go('login');
@@ -146,11 +179,11 @@ function ($scope, $stateParams) {
 
 
 }])
-   
-.controller('loginCtrl', ['$scope', '$stateParams', '$state', '$ionicPopup', 'LoginService',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+
+.controller('loginCtrl', ['$scope', '$stateParams', '$state', '$ionicPopup', 'LoginService', '$rootScope',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-function ($scope, $stateParams, $state, $ionicPopup, LoginService) {
+function ($scope, $stateParams, $state, $ionicPopup, LoginService, $rootScope) {
 
 	$scope.data = {
 		'email': '',
@@ -159,6 +192,7 @@ function ($scope, $stateParams, $state, $ionicPopup, LoginService) {
 
 	$scope.login = function() {
 		LoginService.loginUser($scope.data.email, $scope.data.password).success(function(data) {
+      $rootScope.email = $scope.data.email;
 			$state.go('menu.home');
 		}).error(function(data) {
 			var alertPopup = $ionicPopup.alert({
@@ -170,7 +204,7 @@ function ($scope, $stateParams, $state, $ionicPopup, LoginService) {
 	}
 
 }])
-   
+
 .controller('signupCtrl', ['$scope', '$stateParams', '$state', '$ionicPopup', 'SignUpService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
@@ -185,7 +219,7 @@ function ($scope, $stateParams, $state, $ionicPopup, SignUpService) {
 	$scope.error='';
 
 	$scope.signup = function(){
-		
+
 		SignUpService.signupUser($scope.data.name, $scope.data.email, $scope.data.password).success(function(data) {
 			$state.go('menu.home');
 		}).error(function(data) {
@@ -195,8 +229,7 @@ function ($scope, $stateParams, $state, $ionicPopup, SignUpService) {
 			});
 
 		});
-		
+
 	}
 
 }])
- 

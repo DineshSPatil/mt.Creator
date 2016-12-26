@@ -1,11 +1,15 @@
 <ion-view title="Add Cloth" id="page8">
-	
+
 	<!-- <ion-nav-buttons side="right" class="has-header">
 	<button ui-sref="menu.home" class="button button-icon ion-tshirt-outline"></button>
 	</ion-nav-buttons>
 	-->
   <ion-content padding="true" class="has-header">
   	<form name="myForm" novalidate>
+			<div class="col text-center">
+				<button class="button outline button-icon ion-images"></button>
+			</div>
+
   		<div class="list" >
   			<label class="item item-input">
   				<i class="icon ion-tshirt-outline placeholder-icon"></i>
@@ -22,7 +26,7 @@
   				<input type="text" name="clothInfo" ng-model="clothInfo" ng-minlength="5" placeholder="Description [Required]" required/>
   			</label>
   		</div>
-  		
+
   		<div class="padding">
   			<button class="button button-block button-positive" ng-disabled="myForm.$invalid" ng-click="submit(clothName)">
   				Submit
@@ -39,7 +43,7 @@
   			<p ng-show="myForm.clothInfo.$error.minlength"> * Cloth desc must be min length of 5 characters</p>
   		</div>
 
-  		
+
   	</form>
   </ion-content>
 

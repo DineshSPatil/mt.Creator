@@ -1,29 +1,38 @@
 <ion-view title="Signup" hide-nav-bar="true" cache-view="false" nav-transition="none" id="page5">
-  <ion-content padding="true" style="background: url(img/smart_clothes/1-vintage_clothes.jpg) no-repeat center;background-size:cover;" class="manual-ios-statusbar-padding" scroll="false">
+  <ion-content padding="true" style="background: url(img/smart_clothes/some_colors-wallpaper-3840x2400.jpg) no-repeat center;background-size:cover;" class="manual-ios-statusbar-padding" scroll="false">
+
     <div id="signup-markdown2" class="show-list-numbers-and-dots error-box" ng-if>
       <p style="color:#000000;">{{error}}</p>
     </div>
-    <form id="signup-form2" class="list center-form">
+
+    <form id="signup-form2" class="list center-form" ng-submit="signup()">
+
       <div>
         <img src="img/nad6SW0dRCpD8g2ldkdu_WR_logo_thingworx.png" style="display: block; width: 60%; height: auto; margin-left: auto; margin-right: auto;">
       </div>
+
       <ion-list id="signup-list3">
         <label class="item item-input top-input" id="signup-input3">
           <span class="input-label">Email</span>
-          <input type="email" placeholder="" ng-model="data.email">
+          <input type="email" placeholder="" ng-model="data.email" required />
         </label>
         <label class="item item-input top-input" id="signup-input5">
           <span class="input-label">Name</span>
-          <input type="text" placeholder="" ng-model="data.name">
+          <input type="text" placeholder="" ng-model="data.name" maxlength="20"required />
         </label>
         <label class="item item-input bottom-input" id="signup-input4">
           <span class="input-label">Password</span>
-          <input type="password" placeholder="" ng-model="data.password">
+          <input type="password" placeholder="" ng-model="data.password" minlength="6" maxlength="15" required />
         </label>
       </ion-list>
+
       <div class="spacer" style="width: 300px; height: 27px;"></div>
-      <button id="signup-button3" class="button button-light  button-block" ng-click="signup()">Sign Up</button>
-      <a ui-sref="login" id="signup-button4" class="button button-light  button-block button-clear">Already have an account?</a>
+
+      <input type="submit" id="signup-button3" class="button button-light  button-block" value="Sign Up"/>
+
+      <!-- <button id="signup-button3" class="button button-light  button-block" ng-click="signup()">Sign Up</button> -->
+
+      <a ui-sref="login" id="signup-button4" class="button button-dark  button-block button-clear">Already have an account?</a>
     </form>
   </ion-content>
 </ion-view>
