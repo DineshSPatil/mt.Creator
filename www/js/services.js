@@ -115,7 +115,7 @@ angular.module('app.services', ['ngCordova',])
                 }
             }
 
-            $http.post('http://localhost:8080/Thingworx/Things/smartThing/Services/AuthUser', data, config)
+            $http.post('http://10.192.70.183:8080/Thingworx/Things/smartThing/Services/AuthUser', data, config)
             .success(function (data, status, headers, config) {
                 PostDataResponse = data.rows[0].Result;
 
@@ -171,7 +171,7 @@ angular.module('app.services', ['ngCordova',])
                 }
             }
 
-            $http.post('http://localhost:8080/Thingworx/Things/smartThing/Services/AddNewUser', data, config)
+            $http.post('http://10.192.70.183:8080/Thingworx/Things/smartThing/Services/AddNewUser', data, config)
             .success(function (data, status, headers, config) {
                 PostDataResponse = data.rows[0].Result;
 
